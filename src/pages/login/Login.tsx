@@ -1,10 +1,44 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Grid, Typography, TextField, Button } from "@material-ui/core";
 import { Box } from "@mui/material"
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import "./Login.css";
+import UserLogin from '../../model/UserLogin';
 
 function Login() {
+    let navigate = useNavigate();   
+    const [getEmail, setEmail] = useState('Lucas@email.com');
+    const [userLogin, setUserLogin] = useState<UserLogin>(
+        {
+            id: 0,
+            usuario: '',
+            senha: '',
+            token: ''
+        }
+    )
+
+    // function modificaEmail() {
+    //     setEmail('Admin@email.com')
+    // }
+
+    function updatedModel(e: ChangeEvent<HTMLInputElement) {
+        setUserLogin({
+            ...UserLogin,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
+        e.preventDefault();
+        try{
+            const resposta = await api.post('/usuarios/logar', userLogin)
+            alert('Usuário Logado com sucesso!')
+            navigate('/home')
+        } catch(error){
+            alert('Informações inconsistentes ao logar')
+        }
+    }
+
     return (
         <Grid container direction='row' justifyContent="center" alignItems="center">
             <Grid alignItems="center" xs={6}>
