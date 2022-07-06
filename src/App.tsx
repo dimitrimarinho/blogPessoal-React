@@ -5,6 +5,8 @@ import Footer from './components/static/footer/Footer';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login'
 import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario'
+import ListaTema from './components/temas/listatema/ListaTema';
+import ListaPostagem from './components/postagens/listapostagem/ListaPostagem';
 import './App.css';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/cadastrousuario" element={<CadastroUsuario />} />
+          <Route path="/temas" element={<ListaTema />} />
+          <Route path="/posts" element={<ListaPostagem />} />
         </Routes>
       </div>
       <Footer />
