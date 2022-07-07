@@ -1,6 +1,6 @@
+import React from "react";
 import { Grid, Typography, Button } from "@material-ui/core";
 import { Box } from "@mui/material"
-import React from "react";
 import TabPostagem from "../../components/postagens/tabpostagem/TabPostagem";
 import './Home.css';
 
