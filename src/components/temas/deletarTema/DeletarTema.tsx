@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Tema from '../../../models/Tema';
 import { buscaId, deleteId } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 import './DeletarTema.css';
 
 function DeletarTema() {
 
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-    // eslint-disable-next-line
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["token"]>(
+        (state) => state.token    
+    );
     const [tema, setTema] = useState<Tema>()
 
     useEffect(() => {
@@ -31,7 +33,7 @@ function DeletarTema() {
     }, [id])
 
     async function findByID(id: string) {
-        buscaId(`/tema/${id}`, setTema, {
+        buscaId(`/temas/${id}`, setTema, {
             headers: {
                 'Authorization': token
             }
@@ -40,7 +42,7 @@ function DeletarTema() {
 
     function sim() {
         navigate("/temas")
-        deleteId(`/tema/${id}`, {
+        deleteId(`/temas/${id}`, {
             headers: {
                 'Authorization': token
             }

@@ -1,14 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from "react-use-localstorage";
 import './Navbar.css';
 
 function Navbar() {
 
     // eslint-disable-next-line
-    const [token, setToken] = useLocalStorage('token');
+    const [token, setToken] = useState('');
     let navigate = useNavigate();
 
     function goLogout() {

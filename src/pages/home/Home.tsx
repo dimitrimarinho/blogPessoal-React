@@ -4,14 +4,16 @@ import { Box } from "@mui/material"
 import TabPostagem from "../../components/postagens/tabpostagem/TabPostagem";
 import ModalPostagem from "../../components/postagens/modalPostagem/ModalPostagem";
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "react-use-localstorage";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../store/tokens/tokensReducer";
 import './Home.css';
 
 function Home() {
 
     let navigate = useNavigate();
-    // eslint-disable-next-line
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["token"]>(
+        (state) => state.token    
+    );
 
     useEffect(() => {
         if (token === '') {

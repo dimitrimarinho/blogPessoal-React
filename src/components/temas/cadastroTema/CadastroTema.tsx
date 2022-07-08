@@ -1,17 +1,19 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { useNavigate, useParams } from "react-router-dom";
-import useLocalStorage from "react-use-localstorage";
 import Tema from "../../../models/Tema";
 import { buscaId, post, put } from "../../../services/Service";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../../store/tokens/tokensReducer";
 import './CadastroTema.css';
 
 function CadastroTema() {
 
     let navigate = useNavigate();
     const { id } = useParams<{id: string}>();
-    // eslint-disable-next-line
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["token"]>(
+        (state) => state.token    
+    );
     const [tema, setTema] = useState<Tema>({
         id: 0,
         descricao: ''
@@ -33,7 +35,7 @@ function CadastroTema() {
     }, [id])
 
     async function findByID(id: string){
-        buscaId(`/tema/${id}`, setTema, {
+        buscaId(`/temas/${id}`, setTema, {
             headers: {
                 'Authorization': token
             }
@@ -53,14 +55,14 @@ function CadastroTema() {
         
         if(id !== undefined) {
             console.log(tema)
-            put(`/tema`, tema, setTema, {
+            put(`/temas`, tema, setTema, {
                 headers: {
                     'Authorization': token
                 }
             })
             alert('Tema atualizado com sucesso');
         } else {
-            post(`/tema`, tema, setTema, {
+            post(`/temas`, tema, setTema, {
                 headers: {
                     'Authorization': token
                 }

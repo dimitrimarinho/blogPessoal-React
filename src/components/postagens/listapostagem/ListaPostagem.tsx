@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import Postagem from "../../../models/Postagem";
-import useLocalStorage from "react-use-localstorage";
 import { busca } from "../../../services/Service";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../../store/tokens/tokensReducer";
 import './ListaPostagem.css';
 
 function ListaPostagem() {
 
     const [posts, setPosts] = useState<Postagem[]>([]);
-    // eslint-disable-next-line
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["token"]>(
+        (state) => state.token    
+    );
     let navigate = useNavigate();
 
     useEffect(() => {

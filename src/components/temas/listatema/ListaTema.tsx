@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import Tema from "../../../models/Tema";
-import useLocalStorage from "react-use-localstorage";
 import { busca } from "../../../services/Service";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../../store/tokens/tokensReducer";
 import './ListaTema.css';
 
 function ListaTema() {
 
     const [temas, setTemas] = useState<Tema[]>([]);
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["token"]>(
+        (state) => state.token    
+    );
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -20,6 +23,7 @@ function ListaTema() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token])
 
+    
     async function getTema() {
         await busca("/temas", setTemas, {
             headers: {
@@ -30,6 +34,7 @@ function ListaTema() {
 
     useEffect(() => {
         getTema()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [temas.length])
 
     return (
