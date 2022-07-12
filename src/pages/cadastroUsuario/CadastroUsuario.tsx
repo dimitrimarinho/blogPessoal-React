@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import User from "../../models/Usuario";
 import { cadastroUsuario } from "../../services/Service";
 import './CadastroUsuario.css';
+import { toast } from "react-toastify";
 
 function CadastroUsuario() {
 
@@ -33,7 +34,7 @@ function CadastroUsuario() {
         if (userResult.id !== 0) {
             navigate('/login')
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userResult])
 
     function confirmarSenhaHandle(e: ChangeEvent<HTMLInputElement>) {
@@ -52,9 +53,28 @@ function CadastroUsuario() {
         e.preventDefault()
         if (confirmarSenha === user.senha) {
             cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-            alert('Usuario cadastrado com sucesso')
+            toast.success('Usuário cadastrado com sucesso', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            })
+            navigate('/login')
         } else {
-            alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+            toast.error('Dados inconsistentes. Favor verificar as informações de cadastro.', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            })
         }
     }
 

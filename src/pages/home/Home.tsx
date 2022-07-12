@@ -7,18 +7,28 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../store/tokens/tokensReducer";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import './Home.css';
 
 function Home() {
 
     let navigate = useNavigate();
     const token = useSelector<TokenState, TokenState["token"]>(
-        (state) => state.token    
+        (state) => state.token
     );
 
     useEffect(() => {
         if (token === '') {
-            alert("Você precisa estar logado")
+            toast.error('Você precisa estar logado', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            })
             navigate("/login")
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,7 +46,7 @@ function Home() {
                         <Box marginRight={1}>
                             <ModalPostagem />
                         </Box>
-                        <Link to= "/posts" className="text-decorator-none">
+                        <Link to="/posts" className="text-decorator-none">
                             <Button variant="outlined" className="botao">Ver Postagens</Button>
                         </Link>
                     </Box>
