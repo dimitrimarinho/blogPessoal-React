@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { AppBar, Tab, Tabs, Typography, Box } from '@material-ui/core';
+import { AppBar, Tab, Tabs, Typography } from '@material-ui/core';
 import { TabContext, TabPanel } from '@material-ui/lab'
+import React, { useState } from 'react';
+import { Box } from "@mui/material";
 import ListaPostagem from '../listapostagem/ListaPostagem';
 import './TabPostagem.css'
 
@@ -8,7 +9,7 @@ function TabPostagem() {
 
     const [value, setValue] = useState('1')
 
-    function handleChange(event: React.ChangeEvent<{}>, newValue: string){
+    function handleChange(event: React.ChangeEvent<{}>, newValue: string) {
         setValue(newValue);
     }
 

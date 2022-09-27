@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import Postagem from "../../../models/Postagem";
-import { busca } from "../../../services/Service";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../../store/tokens/tokensReducer";
-import './ListaPostagem.css';
+import { busca } from "../../../services/Service";
 import { toast } from "react-toastify";
+import { Box } from '@mui/material';
+import Postagem from "../../../models/Postagem";
+import './ListaPostagem.css';
 
 function ListaPostagem() {
 
     const [posts, setPosts] = useState<Postagem[]>([]);
     const token = useSelector<TokenState, TokenState["token"]>(
-        (state) => state.token    
+        (state) => state.token
     );
     let navigate = useNavigate();
 
@@ -30,8 +31,7 @@ function ListaPostagem() {
             })
             navigate('/login')
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token])
+    }, [token, navigate])
 
     async function getPosts() {
         await busca("/postagens", setPosts, {

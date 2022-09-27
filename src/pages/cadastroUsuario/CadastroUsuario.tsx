@@ -1,11 +1,11 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
 import { Grid, Typography, TextField, Button } from "@material-ui/core";
-import { Box } from "@mui/material";
+import { useState, useEffect, ChangeEvent } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import User from "../../models/Usuario";
 import { cadastroUsuario } from "../../services/Service";
-import './CadastroUsuario.css';
 import { toast } from "react-toastify";
+import { Box } from "@mui/material";
+import User from "../../models/Usuario";
+import './CadastroUsuario.css';
 
 function CadastroUsuario() {
 

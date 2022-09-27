@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import Tema from "../../../models/Tema";
-import { busca } from "../../../services/Service";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../../store/tokens/tokensReducer";
-import './ListaTema.css';
 import { toast } from "react-toastify";
+import { busca } from "../../../services/Service";
+import { Box } from "@mui/material";
+import Tema from "../../../models/Tema";
+import './ListaTema.css';
 
 function ListaTema() {
 
